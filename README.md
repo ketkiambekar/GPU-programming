@@ -5,3 +5,5 @@ This section contains two projects. Both projects calculate dot products using p
 However, one uses CUDA while the other one does it using OpenMP. 
 
 The folders contains all the requisite input and component files along with instructions on how to execute them on a GPU or a GPU cluster. 
+
+These were a part of my Graduate Course in Data Science at NJIT
