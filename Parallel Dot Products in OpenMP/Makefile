@@ -1,8 +1,6 @@
 CXX = icc
 CXXFLAGS = -O3 -Wall
-#CXXFLAGS3 = -arch=sm_20 -use_fast_math -O3
 CXXFLAGS3 = -O3 
-#CXXFLAGS3 =
 TARGET1= dp_openmp
 
 all : $(TARGET1)

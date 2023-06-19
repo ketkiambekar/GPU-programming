@@ -22,6 +22,8 @@ void kernel(float *matrix, float *vector, float *result, int rows, int cols, int
     float sum = 0;
     for (j = tid * jobs; j < stop; j++){
         if( j < rows){
+
+            // Code for testing, comments preserved intentionally.
             
             /*printf("\nThread: %d , mdata:%f",tid,((float)mdata[tid]-48));
             printf("\nThread: %d , vdata:%f",tid,((float)vdata[(tid+1)%cols]-48));

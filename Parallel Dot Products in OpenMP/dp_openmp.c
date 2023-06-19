@@ -11,15 +11,7 @@
 #include "kernel_openmp.h"
 
 int main(int argc, char const *argv[]){
-	/*Set up CUDA device*/
-	/*
-	int CUDA_DEVICE = atoi(argv[5]);
-	cudaError err = cudaSetDevice(CUDA_DEVICE);
-	if(err != cudaSuccess){
-		printf("Error setting cuda device\n");
-		exit(EXIT_FAILURE);
-	}
-	*/
+	
 	/*Host variable declaration */
 	FILE *fp1;
 	FILE *fp2;
@@ -33,11 +25,7 @@ int main(int argc, char const *argv[]){
 	float* dataM = (float*) malloc(rows * cols * sizeof(float));
 	float* dataV = (float*) malloc(cols * sizeof(float));
 	float* result = (float*) malloc(rows * sizeof(float));
-	/*
-	cudaMallocHost((void **) &dataM, sizeof(float) * rows * cols);
-	cudaMallocHost((void **) &dataV, sizeof(float) * cols);
-	cudaMallocHost((void **) &result, sizeof(float) * rows);
-	*/
+	
 	/*Read file*/
 	/* Validation to check if the Matrix data file is readable */
 	fp1 = fopen(argv[3], "r");
@@ -85,50 +73,15 @@ int main(int argc, char const *argv[]){
 	fflush(stdout);
 
     /*Allocate memory space on the GPU*/ 
-	/*
-    float *data_mat, *data_vec, *data_res;
-	err = cudaMalloc((void **) &data_mat, sizeof(float) * rows * cols);
-	if(err != cudaSuccess){
-		printf("Error in allocating memory for matrix on the GPU\n");
-	}
-    err = cudaMalloc((void **) &data_vec, sizeof(float) * cols);
-	if(err != cudaSuccess){
-		printf("Error in allocating memory for Vector on the GPU\n");
-	}
-	err = cudaMalloc((void **) &data_res, sizeof(float) * rows);
-	if(err != cudaSuccess){
-		printf("Error in allocating memory for Result on the GPU\n");
-	}
-	*/
-    /*// copy matrix A and B from host to device memory*/
-	/*
-    err = cudaMemcpy(data_mat, dataM, sizeof(float) * rows * cols, cudaMemcpyHostToDevice);
-	if(err != cudaSuccess){
-		printf("Error copying matrix to GPU\n");
-	}
-	err = cudaMemcpy(data_vec, dataV, sizeof(float) * cols, cudaMemcpyHostToDevice);
-	if(err != cudaSuccess){
-		printf("Error copying vector to GPU\n");
-	}
-	*/
-	/*int THREADS = 32;*/
-	int jobs;
-	/*int BLOCKS;*/
-	/*jobs = rows;*/
-	jobs = ((rows + nprocs - 1) / nprocs);
-	/*BLOCKS = (jobs + THREADS - 1)/THREADS;*/
+	
+	int jobs;	
+	jobs = ((rows + nprocs - 1) / nprocs);	
 	printf("jobs = %d\n", jobs);
+
 #pragma omp parallel num_threads(nprocs)
-	/*kernel<<<BLOCKS, THREADS>>>(data_mat, data_vec, data_res, rows, cols);*/
+	
 	kernel(dataM, dataV, result, rows, cols, jobs);
-	/*copy results from GPU to host*/
-	/*
-	err = cudaMemcpy(result, data_mat, sizeof(float) * rows, cudaMemcpyDeviceToHost);
-	if(err != cudaSuccess){
-		printf("Error copying results from GPU\n");
-	}
-    cudaThreadSynchronize();
-	*/
+	
 	
 	/*Print out the result*/
 	int k;
@@ -137,14 +90,7 @@ int main(int argc, char const *argv[]){
 		printf("\n%f ", result[k]);
 	}
 	printf("\n");
-    // free memory
-	/*
-    cudaFree(data_mat);
-    cudaFree(data_vec);
-    cudaFree(data_res);
-    cudaFreeHost(dataM);
-    cudaFreeHost(dataV);
-    cudaFreeHost(result);
-    */
+  
+	
 	return 0;
 }

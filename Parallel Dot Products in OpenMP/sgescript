@@ -30,9 +30,4 @@ module load intel/compiler/2017.2.174
 #Replace usman's home directory path with yours in the command below
 
 /usr/bin/time -f %e -o DP_time_omp ./dp_openmp 3 4 iMatrix.txt iVector.txt 10 > output_omp
-#/usr/bin/time -f %e -o chi2time_gpu /home/u/usman/courses/cs677_spring19/Chi2/Chi2 /home/u/usman/courses/cs677_spring19/Chi2/traindata 8000 29623 4000 4000 0 256 > output_gpu
-#/usr/bin/time -f %e -o chi2time_gpu2 /home/u/usman/courses/cs677_spring19/Chi2/Chi2 /home/u/usman/courses/cs698_spring18/data_fixed_.01 4901 422006 1963 2938 0 512 > output_gpu2
-
-#/usr/bin/time -f %e -o chi2time_serial /home/u/usman/courses/cs677_spring19/Chi2/Chi2_serial /home/u/usman/courses/cs677_spring19/Chi2/traindata 8000 29623 4000 4000 > output_serial
-#/usr/bin/time -f %e -o chi2time_serial2 /home/u/usman/courses/cs677_spring19/Chi2/Chi2_serial /home/u/usman/courses/cs698_spring18/data_fixed_.01 4901 422006 1963 2938 > output_serial2
 
